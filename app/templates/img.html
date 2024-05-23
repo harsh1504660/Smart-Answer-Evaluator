@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Answer Evaluator - Evaluate Answers</title>
+    <style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+.container {
+    max-width: 800px;
+    margin: 10px auto 0;
+    padding: 20px;
+    text-align: center;
+    color: #333;
+}
+.navbar {
+    background-color: #492f2f;
+    overflow: hidden;
+}
+.navbar a {
+    float: left;
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+.navbar a:hover {
+    background-color: #a83737;
+    color: #533;
+}
+.form-container {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group select {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+}
+.form-group input[type="submit"] {
+    width: 200px;
+    height: 50px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.form-group input[type="submit"]:hover {
+    background-color: #555;
+}
+.form-group.max-marks-checking {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-group.max-marks-checking .input-container {
+    width: calc(50% - 10px);
+}
+
+.form-group.max-marks-checking .input-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group.max-marks-checking .input-container input[type="text"] {
+    width: 250px;
+    height: 0.75cm; /* Adjusted width for maximum marks input */
+}
+        .image-upload {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .image-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .image-upload label {
+            display: block;
+            padding: 10px 20px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .image-upload label:hover {
+            background-color: #555;
+        }
+
+        .image-preview {
+            margin-top: 10px;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/about">About Us</a>
+        <a href="/help">Help</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/training">Training Your Model</a>
+      </div>
+    <div class="container">
+        <h1>Evaluate Answers</h1>
+        <div class="form-container">
+            <form action="/result/" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="ideal-answer-input">Ideal Answer</label>
+                    <div class="image-upload">
+                        <input type="file" id="ideal-answer-input" name="ideal-answer-input" accept="image/*">
+                        <label for="ideal-answer-input">Choose Image</label>
+                    </div>
+                    <div class="image-preview">
+                        <img id="ideal-answer-preview" src="" alt="Ideal Answer Preview">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="student-answer-input">Student's Answer</label>
+                    <div class="image-upload">
+                        <input type="file" id="student-answer-input" name="student-answer-input" accept="image/*">
+                        <label for="student-answer-input">Choose Image</label>
+                    </div>
+                    <div class="image-preview">
+                        <img id="student-answer-preview" src="" alt="Student's Answer Preview">
+                    </div>
+                </div>
+                <div class="form-group max-marks-checking">
+                    <div class="input-container">
+                        <label for="max-marks">Maximum Marks</label>
+                        <input type="text" id="max-marks" name="max-marks" value="10">
+                    </div>
+                    <div class="input-container">
+                        <label for="checking-type">Checking Type</label>
+                        <select id="checking-type" name="checking-type">
+                            <option value="soft">Soft Checking</option>
+                            <option value="hard">Hard Checking</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="image" value="Evaluate">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const idealAnswerInput = document.getElementById('ideal-answer-input');
+        const idealAnswerPreview = document.getElementById('ideal-answer-preview');
+
+        const studentAnswerInput = document.getElementById('student-answer-input');
+        const studentAnswerPreview = document.getElementById('student-answer-preview');
+
+        idealAnswerInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.addEventListener('load', function () {
+                    idealAnswerPreview.src = reader.result;
+                });
+                reader.readAsDataURL(file);
+            } else {
+                idealAnswerPreview.src = '';
+            }
+        });
+
+        studentAnswerInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.addEventListener('load', function () {
+                    studentAnswerPreview.src = reader.result;
+                });
+                reader.readAsDataURL(file);
+            } else {
+                studentAnswerPreview.src = '';
+            }
+        });
+    </script>
+</body>
+
+</html>

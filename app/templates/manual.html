@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Answer Evaluator - Evaluate Answers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            max-width: 800px;
+            margin: 10px auto 0;
+            padding: 20px;
+            text-align: center;
+            color: #333;
+        }
+        .navbar {
+            background-color: #492f2f;
+            overflow: hidden;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #a83737;
+            color: #533;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group textarea,
+        .form-group input[type="text"],
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            resize: none;
+        }
+        .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+        }
+        .form-group input[type="submit"] {
+            width: 200px;
+            height: 50px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-group input[type="submit"]:hover {
+            background-color: #555;
+        }
+        .form-group.max-marks-checking {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-group.max-marks-checking .input-container {
+            width: calc(50% - 50px);
+        }
+
+        .form-group.max-marks-checking .input-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/about">About Us</a>
+        <a href="/help">Help</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/training">Training Your Model</a>
+      </div>
+    <div class="container">
+        <h1>Evaluate Answers</h1>
+        <div class="form-container">
+            <form action="result" method="post">
+                <div class="form-group">
+                    <label for="ideal-answer">Ideal Answer</label>
+                    <textarea id="ideal-answer" name="ideal-answer" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="student-answer">Student's Answer</label>
+                    <textarea id="student-answer" name="student-answer" rows="6"></textarea>
+                </div>
+                <div class="form-group max-marks-checking">
+                    <div class="input-container">
+                        <label for="max-marks">Maximum Marks</label>
+                        <input type="text" id="max-marks" name="max-marks">
+                    </div>
+                    <div class="input-container">
+                        <label for="checking-type">Checking Type</label>
+                        <select id="checking-type" name="checking-type">
+                            <option value="soft">Soft Checking</option>
+                            <option value="hard">Hard Checking</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="manual" value="Evaluate">
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
