@@ -1,6 +1,6 @@
 from flask import Flask,request,render_template,flash,redirect
-from preprocess import prep , dataloader
-from prediction import prediction 
+from app.preprocess import prep , dataloader
+from app.prediction import prediction 
 from werkzeug.utils import secure_filename
 import os 
 from ocr import ocr
