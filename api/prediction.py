@@ -5,22 +5,15 @@ import onnxruntime
 import numpy as np
 import time
 from huggingface_hub import hf_hub_download
-#from preprocess import BertSemanticDataGenerator
+
 
 
 def prediction(query):
     start = time.time()
-    #tf.keras.utils.get_custom_objects()['TFBertModel'] = TFBertModel
-
-    #model =tf.keras.models.load_model(r'E:\NLP\6-Projects\11-Smart_Answer_Checker\Modeling\models\model2.h5')
-
-    #proba = model.predict(query)[0]  # Assuming you want predictions for the first sample in the batch
-    #idx = np.argmax(proba)
-    #proba_ = f"{proba[idx]: .2f}%" 
-    
     print('no nltk')
+    api_key = os.getenv('hf_key')
     model_name='harshai1504/sae'
-    model = hf_hub_download(repo_id=model_name, filename="model_quantized_8000.onnx", use_auth_token='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')
+    model = hf_hub_download(repo_id=model_name, filename="model_quantized_8000.onnx", use_auth_token=api_key)
     print("model is loaded")
     session = onnxruntime.InferenceSession(model)
     print("model is loaded")
