@@ -18,7 +18,7 @@ def prediction(query):
     #idx = np.argmax(proba)
     #proba_ = f"{proba[idx]: .2f}%" 
     
- 
+    print('no nltk')
     model_name='harshai1504/sae'
     model = hf_hub_download(repo_id=model_name, filename="model_quantized_8000.onnx", use_auth_token='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')
     print("model is loaded")

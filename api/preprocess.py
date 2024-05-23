@@ -4,14 +4,14 @@ import re
 import numpy as np
 from api.stopwords import STOPWORDS
 import transformers
-import nltk
+
 from api.grammer import correct_grammar
 #nltk.download('stopwords')
 
 # Register the custom object (TFBertModel) with TensorFlow
 print("stop words is removeed")
 def remove_stopwords(text):
-    words = nltk.word_tokenize(text)
+    words = text.split()
     filtered_text = [word for word in words if word.lower() not in STOPWORDS]
     return ' '.join(filtered_text)
 def prep(text):
