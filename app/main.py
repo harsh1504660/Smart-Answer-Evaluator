@@ -4,10 +4,15 @@ from app.prediction import prediction
 from werkzeug.utils import secure_filename
 import os 
 from app.ocr import ocr
-import secrets
+import hashlib
 
-secret_key = secrets.token_hex(16)
 
+
+def generate_secret_key():
+    random_bytes = os.urandom(16)
+    return hashlib.sha256(random_bytes).hexdigest()
+
+secret_key = generate_secret_key()
 app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png'}
