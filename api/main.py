@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from preprocess import prep, dataloader
-from prediction import prediction
+from api.preprocess import prep, dataloader
+from api.prediction import prediction
 import numpy as np
 import uvicorn
 
