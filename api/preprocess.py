@@ -2,10 +2,9 @@ import tensorflow as tf
 from transformers import TFBertModel
 import re
 import numpy as np
-from stopwords import STOPWORDS
+from api.stopwords import STOPWORDS
 import transformers
-
-from grammer import correct_grammar
+from api.grammer import correct_grammar
 #nltk.download('stopwords')
 
 # Register the custom object (TFBertModel) with TensorFlow

@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from preprocess import prep, dataloader
-from prediction import prediction
+from api.preprocess import prep, dataloader
+from api.prediction import prediction
 import numpy as np
 import uvicorn
 
@@ -29,21 +29,17 @@ def predict(request: PredictRequest):
         print(student)
         
         query = dataloader(ideal, student)
-        print("query sent")
         
         proba, idx = prediction(query)
         
-        # Convert numpy array to a list
         if isinstance(proba, np.ndarray):
             proba = proba.tolist()
         elif isinstance(proba, list):
             proba = [p.tolist() for p in proba if isinstance(p, np.ndarray)]
 
-        # Convert idx to Python int if it's a numpy int
         if isinstance(idx, np.integer):
             idx = int(idx)
         
-        # Create the response
         response = {
             "proba": proba[0][0],
             "idx": idx
