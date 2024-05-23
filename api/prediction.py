@@ -1,5 +1,5 @@
-import tensorflow as tf
-import transformers
+#import tensorflow as tf
+#import transformers
 #from transformers import TFBertModel
 import onnxruntime
 import numpy as np
