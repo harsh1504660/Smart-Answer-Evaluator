@@ -5,7 +5,7 @@ import onnxruntime
 import numpy as np
 import time
 from huggingface_hub import hf_hub_download
-
+import os
 
 
 def prediction(query):
