@@ -104,7 +104,8 @@ def evaluate_answer_image():
         student = prep(ideal)
 
         query = dataloader(ideal,student)
-
+        print(ideal)
+        print(student)
         proba , idx = prediction(query)
         p_correct = proba[0][0][2]
         p_incorrect = proba[0][0][1]
