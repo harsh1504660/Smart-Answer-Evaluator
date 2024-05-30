@@ -3,9 +3,9 @@ from app.preprocess import prep , dataloader
 from app.prediction import prediction 
 from werkzeug.utils import secure_filename
 import os 
-from app.ocr import ocr
+from ocr import ocr
 import hashlib
-
+from app.evaluation import evaluation
 
 
 def generate_secret_key():
@@ -58,9 +58,12 @@ def evaluate_answers_manual():
     query = dataloader(ideal,student)
 
     proba , idx = prediction(query)
- 
-
-    return render_template('result.html', marks={idx})
+    p_correct = proba[0][0][2]
+    p_incorrect = proba[0][0][1]
+    p_partial = proba[0][0][0]
+    marks = evaluation(checking_type=checking_type,max_marks=max_marks,p_correct=p_correct,
+        p_incorrect =  p_incorrect,p_partial =  p_partial,idx = idx)
+    return render_template('result.html', marks=marks)
 
 ### SHIFT THEM INTO EVALUATION.PY
 def evaluate_answer_image():
@@ -102,7 +105,12 @@ def evaluate_answer_image():
         query = dataloader(ideal,student)
 
         proba , idx = prediction(query)
-        return render_template('result.html',marks={idx})
+        p_correct = proba[0][0][2]
+        p_incorrect = proba[0][0][1]
+        p_partial = proba[0][0][0]
+        marks = evaluation(checking_type=checking_type,max_marks=max_marks,p_correct=p_correct,
+            p_incorrect =  p_incorrect,p_partial =  p_partial,idx = idx)
+        return render_template('result.html',marks=marks)
     
     else :
         return render_template('error.html',redirect_url='img')
