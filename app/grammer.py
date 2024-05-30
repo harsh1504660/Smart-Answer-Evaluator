@@ -2,6 +2,7 @@ import openai
 import re
 import time
 import random
+import os
 # Set your OpenAI API key
 api_key = os.getenv('gpt_key')
 openai.api_key = api_key
