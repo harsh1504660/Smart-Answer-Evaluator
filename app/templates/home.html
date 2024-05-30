@@ -1,122 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Answer Evaluator</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f2f2f2;
-    color: #333; /* Dark text for better contrast on light background */
-  }
-  .container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    text-align: center;
-  }
-  .button-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 30px;
-  }
-  .button {
-    display: inline-block;
-    width: 200px;
-    height: 50px;
-    background-color: #b97d7d; /* Darker blue button */
-    color: #fff; /* White text */
-    text-align: center;
-    font-size: 18px;
-    line-height: 50px;
-    text-decoration: none;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin: 10px 0;
-  }
-  .button:hover {
-    background-color: #a83737; /* Blue hover effect */
-  }
-  .navbar {
-    background-color: #492f2f; /* Even darker blue navbar */
-    overflow: hidden;
-  }
-  .navbar a {
-    float: left;
-    display: block;
-    color: #fff; /* White text for navbar */
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-  }
-  .navbar a:hover {
-    background-color: #a83737; /* Darker blue hover for navbar */
-  }
-
-  /* Typing animation */
-  .typing-animation {
-    overflow: hidden;
-    white-space: nowrap;
-    margin: 0 auto;
-    border-right: 3px solid #007bff; /* Blue typing animation */
-    animation: typing 3s steps(40,end) forwards, blink 1s infinite;
-  }
-
-  @keyframes typing {
-    from {
-      width: 0;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Answer Evaluator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      color: #333;
     }
-    to {
-      width: 70%;
-    }
-  }
-
-  @keyframes blink {
-    from { border-color: transparent }
-    to { border-color: #007bff; } /* Blue blinking cursor */
-  }
-
-  @media (max-width: 600px) {
     .container {
-      margin: 20px auto;
-      padding: 10px;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: center;
+    }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
     }
     .button {
-      width: 100%;
-      font-size: 16px;
-      line-height: 40px;
+      display: inline-block;
+      width: 200px;
+      height: 100px;
+      background-color: #b97d7d;
+      color: #fff;
+      text-align: center;
+      font-size: 18px;
+      line-height: 100px;
+      text-decoration: none;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 10px 0;
+    }
+    .button:hover {
+      background-color: #a83737;
+    }
+    .navbar {
+      background-color: #492f2f;
+      overflow: hidden;
+      position: relative;
     }
     .navbar a {
-      float: none;
+      float: left;
       display: block;
+      color: #fff;
       text-align: center;
-      padding: 10px;
+      padding: 14px 20px;
+      text-decoration: none;
     }
-  }
-</style>
+    .navbar a:hover {
+      background-color: #a83737;
+    }
+    .navbar a.icon {
+      display: none;
+    }
+    @media screen and (max-width: 600px) {
+      .navbar a:not(:first-child) {
+        display: none;
+      }
+      .navbar a.icon {
+        display: block;
+        float: left; /* Align icon to the left */
+        color: #fff;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      .navbar.responsive {
+        position: relative;
+      }
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .navbar.responsive a {
+        display: block;
+        float: none;
+        text-align: left;
+      }
+    }
+    .typing-animation {
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0 auto;
+      border-right: 3px solid #007bff;
+      animation: typing 6s steps(30) forwards, blink 1s step-end infinite;
+    }
+    @keyframes typing {
+      0% { width: 0; }
+      5% { width: 11.5%; }
+      15% { width: 23%; }
+      25% { width: 34.5%; }
+      35% { width: 46%; }
+      50% { width: 69.5%; }
+      100% { width: 100%; }
+    }
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+    }
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px auto;
+        padding: 10px;
+      }
+      .button {
+        width: calc(50% - 20px);
+        height: 80px; /* Adjust height if needed */
+        font-size: 16px;
+        line-height: 80px; /* Adjust line height if needed */
+      }
+      .typing-animation {
+        font-size: 18px;
+        width: 100%;
+        animation: mobileTyping 6s steps(100) forwards, blink 1s step-end infinite;
+        border-right: 3px solid #007bff;
+      }
+    }
+    @keyframes mobileTyping {
+      0% { width: 0; }
+      100% { width: 100%; }
+    }
+  </style>
 </head>
 <body>
-<div class="navbar">
-  <a href="/">Home</a>
-  <a href="/about">About Us</a>
-  <a href="/help">Help</a>
-  <a href="/contact">Contact Us</a>
-  <a href="/training">Training Your Model</a>
-</div>
-<div class="container">
-  <h1 class="typing-animation">Welcome to Smart Answer Evaluator</h1>
-  <div class="button-container">
-    <a href="manual" class="button">Upload Manually</a>
-    <a href="img" class="button">Upload Image</a>
+  <div class="navbar" id="myNavbar">
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/help">Help</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/training">Training Your Model</a>
   </div>
-</div>
+  <div class="container">
+    <h1 class="typing-animation">Welcome to Smart Answer Evaluator</h1>
+    <div class="button-container">
+      <a href="manual" class="button">Upload Manually</a>
+      <a href="img" class="button">Upload Image</a>
+    </div>
+  </div>
+
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myNavbar");
+      if (x.className === "navbar") {
+        x.className += " responsive";
+      } else {
+        x.className = "navbar";
+      }
+    }
+  </script>
 </body>
 </html>
 
