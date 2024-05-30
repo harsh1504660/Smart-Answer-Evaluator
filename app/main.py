@@ -3,7 +3,7 @@ from app.preprocess import prep , dataloader
 from app.prediction import prediction 
 from werkzeug.utils import secure_filename
 import os 
-from ocr import ocr
+from app.ocr import ocr
 import hashlib
 from app.evaluation import evaluation
 
