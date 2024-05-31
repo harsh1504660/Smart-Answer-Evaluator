@@ -22,23 +22,49 @@
         }
 
         .navbar {
-            background-color: #492f2f;
-            overflow: hidden;
-        }
-
-        .navbar a {
-            float: left;
-            display: block;
-            color: #d6b8b8;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            background-color: #a83737;
-            color: #533;
-        }
+      background-color: #492f2f;
+      overflow: hidden;
+      position: relative;
+    }
+    .navbar a {
+      float: left;
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+    .navbar a:hover {
+      background-color: #a83737;
+    }
+    .navbar a.icon {
+      display: none;
+    }
+    @media screen and (max-width: 600px) {
+      .navbar a:not(:first-child) {
+        display: none;
+      }
+      .navbar a.icon {
+        display: block;
+        float: left; /* Align icon to the left */
+        color: #fff;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      .navbar.responsive {
+        position: relative;
+      }
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .navbar.responsive a {
+        display: block;
+        float: none;
+        text-align: left;
+      }
+    }
 
         h1 {
             text-align: center;
@@ -56,13 +82,14 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/help">Help</a>
-        <a href="/contact">Contact Us</a>
-        <a href="/training">Training Your Model</a>
-    </div>
+  <div class="navbar" id="myNavbar">
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/help">Help</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/training">Training Your Model</a>
+  </div>
     <div class="container">
         <h1>About Smart Answer Evaluator</h1>
         <p>Welcome to Smart Answer Evaluator, a cutting-edge tool designed to revolutionize the way we assess student answers. Our platform utilizes state-of-the-art artificial intelligence technology to analyze and evaluate student responses against ideal answers, providing accurate and objective feedback in real-time.</p>
@@ -80,6 +107,16 @@
 
         <p>Join us in revolutionizing education assessment with the power of AI. Experience the future of grading with Smart Answer Evaluator today.</p>
     </div>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myNavbar");
+        if (x.className === "navbar") {
+          x.className += " responsive";
+        } else {
+          x.className = "navbar";
+        }
+      }
+    </script>
 </body>
 
 </html>
