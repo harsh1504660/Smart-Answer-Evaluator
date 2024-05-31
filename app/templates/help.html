@@ -10,7 +10,7 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
+    background-color: #1F2223;
 }
 .container {
     max-width: 800px;
@@ -20,21 +20,49 @@
     color: #333;
 }
 .navbar {
-    background-color: #492f2f;
-    overflow: hidden;
-}
-.navbar a {
-    float: left;
-    display: block;
-    color: #d6b8b8;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-.navbar a:hover {
-    background-color: #a83737;
-    color: #533;
-}
+      background-color: #4A2C2A;
+      overflow: hidden;
+      position: relative;
+    }
+    .navbar a {
+      float: left;
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+    .navbar a:hover {
+      background-color: #a1523e93;
+    }
+    .navbar a.icon {
+      display: none;
+    }
+    @media screen and (max-width: 600px) {
+      .navbar a:not(:first-child) {
+        display: none;
+      }
+      .navbar a.icon {
+        display: block;
+        float: left; /* Align icon to the left */
+        color: #fff;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      .navbar.responsive {
+        position: relative;
+      }
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .navbar.responsive a {
+        display: block;
+        float: none;
+        text-align: left;
+      }
+    }
 .form-container {
     background-color: #fff;
     padding: 20px;
@@ -99,14 +127,25 @@
 </head>
 
 <body>
-    <div class="navbar">
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/help">Help</a>
-        <a href="/contact">Contact Us</a>
-        <a href="/training">Training Your Model</a>
-    </div>
+  <div class="navbar" id="myNavbar">
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/help">Help</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/training">Training Your Model</a>
+  </div>
     <h1>This is help page...not ready yet</h1>
+    <script>
+      function myFunction() {
+        var x = document.getElementById("myNavbar");
+        if (x.className === "navbar") {
+          x.className += " responsive";
+        } else {
+          x.className = "navbar";
+        }
+      }
+    </script>
 </body>
 
 </html>

@@ -9,7 +9,7 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #172B4D; /* Dark blue background */
+    background-color: #1F2223; /* Dark blue background */
   }
   .container {
     max-width: 800px;
@@ -18,22 +18,50 @@
     text-align: center;
     color: #fff; /* White text */
   }
-  
   .navbar {
-    background-color: #0A192A; /* Even darker blue navbar */
+    background-color: #4A2C2A; /* Dark Gray */
     overflow: hidden;
-  }
-  .navbar a {
-    float: left;
-    display: block;
-    color: #fff; /* White text for navbar */
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-  }
-  .navbar a:hover {
-    background-color: #293C5F; /* Darker blue hover for navbar */
-  }
+    position: relative;
+    }
+    .navbar a {
+      float: left;
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+    .navbar a:hover {
+      background-color: #a1523e93;
+    }
+    .navbar a.icon {
+      display: none;
+    }
+    @media screen and (max-width: 600px) {
+      .navbar a:not(:first-child) {
+        display: none;
+      }
+      .navbar a.icon {
+        display: block;
+        float: left; /* Align icon to the left */
+        color: #fff;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      .navbar.responsive {
+        position: relative;
+      }
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .navbar.responsive a {
+        display: block;
+        float: none;
+        text-align: left;
+      }
+    }
 
   /* Typing animation */
 
@@ -41,7 +69,8 @@
 </style>
 </head>
 <body>
-  <div class="navbar">
+  <div class="navbar" id="myNavbar">
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
     <a href="/">Home</a>
     <a href="/about">About Us</a>
     <a href="/help">Help</a>
@@ -51,5 +80,15 @@
 <div class="container">
   <h1 class="typing-animation">Evaluated Marks : {{marks}} </h1>
 </div>
+<script>
+  function myFunction() {
+    var x = document.getElementById("myNavbar");
+    if (x.className === "navbar") {
+      x.className += " responsive";
+    } else {
+      x.className = "navbar";
+    }
+  }
+</script>
 </body>
 </html>

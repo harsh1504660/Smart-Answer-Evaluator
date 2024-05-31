@@ -10,7 +10,7 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e0262600;
+    background-color: #1F2223;
 }
 .container {
     max-width: 800px;
@@ -20,21 +20,49 @@
     color: #333;
 }
 .navbar {
-    background-color: #492f2f;
+    background-color: #4A2C2A; /* Dark Gray */
     overflow: hidden;
-}
-.navbar a {
-    float: left;
-    display: block;
-    color: #d6b8b8;
-    text-align: center;
-    padding: 14px 20px;
-    text-decoration: none;
-}
-.navbar a:hover {
-    background-color: #a83737;
-    color: #533;
-}
+    position: relative;
+    }
+    .navbar a {
+      float: left;
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+    .navbar a:hover {
+      background-color: #a1523e93;
+    }
+    .navbar a.icon {
+      display: none;
+    }
+    @media screen and (max-width: 600px) {
+      .navbar a:not(:first-child) {
+        display: none;
+      }
+      .navbar a.icon {
+        display: block;
+        float: left; /* Align icon to the left */
+        color: #fff;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      .navbar.responsive {
+        position: relative;
+      }
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+      .navbar.responsive a {
+        display: block;
+        float: none;
+        text-align: left;
+      }
+    }
 .form-container {
     background-color: #fff;
     padding: 20px;
@@ -94,19 +122,44 @@
     width: 250px;
     height: 0.75cm; /* Adjusted width for maximum marks input */
 }
+h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #f3eeee;
+        }
+
+        p {
+            text-align: justify;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
 
     </style>
 </head>
 
 <body>
-    <div class="navbar">
+    <div class="navbar" id="myNavbar">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
         <a href="/">Home</a>
         <a href="/about">About Us</a>
         <a href="/help">Help</a>
         <a href="/contact">Contact Us</a>
         <a href="/training">Training Your Model</a>
-    </div>
+      </div>
+      <div class="container">
     <h1>This is train page....Not ready yet</h1>
+    <p>demo hello</p>
+</div>
+    <script>
+        function myFunction() {
+          var x = document.getElementById("myNavbar");
+          if (x.className === "navbar") {
+            x.className += " responsive";
+          } else {
+            x.className = "navbar";
+          }
+        }
+      </script>
 </body>
 
 </html>
