@@ -71,6 +71,8 @@ def evaluate_answers_manual():
 
 ### SHIFT THEM INTO EVALUATION.PY
 def evaluate_answer_image():
+    if os.path.exists(UPLOAD_FOLDER):
+        shutil.rmtree(UPLOAD_FOLDER)
     os.makedirs(UPLOAD_FOLDER)
     # Check if the post request has the file part
     if 'ideal-answer-input' not in request.files or 'student-answer-input' not in request.files:
@@ -116,7 +118,7 @@ def evaluate_answer_image():
         p_partial = proba[0][0][0]
         marks = evaluation(checking_type=checking_type,max_marks=max_marks,p_correct=p_correct,
             p_incorrect =  p_incorrect,p_partial =  p_partial,idx = idx)
-        shutil.rmtree(UPLOAD_FOLDER)
+        
         return render_template('result.html',marks=marks)
     
     else :
