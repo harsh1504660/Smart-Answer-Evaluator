@@ -2,150 +2,324 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Answer Evaluator - Evaluate Answers</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+  <title>Smart Answer Evaluator - Help</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+  
+  <script>hljs.highlightAll();</script>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #1F2223;
-}
-.container {
-    max-width: 800px;
-    margin: 10px auto 0;
-    padding: 20px;
-    text-align: center;
-    color: #333;
-}
-.navbar {
-      background-color: #4A2C2A;
-      overflow: hidden;
-      position: relative;
-    }
-    .navbar a {
-      float: left;
-      display: block;
-      color: #fff;
-      text-align: center;
-      padding: 14px 20px;
-      text-decoration: none;
-    }
-    .navbar a:hover {
-      background-color: #a1523e93;
-    }
-    .navbar a.icon {
-      display: none;
-    }
-    @media screen and (max-width: 600px) {
-      .navbar a:not(:first-child) {
-        display: none;
-      }
-      .navbar a.icon {
-        display: block;
-        float: left; /* Align icon to the left */
-        color: #fff;
-      }
-    }
-    @media screen and (max-width: 600px) {
-      .navbar.responsive {
-        position: relative;
-      }
-      .navbar.responsive a.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-      .navbar.responsive a {
-        display: block;
-        float: none;
-        text-align: left;
-      }
-    }
-.form-container {
-    background-color: #fff;
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.form-group {
-    margin-bottom: 20px;
-}
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-.form-group select {
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    resize: none;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-}
-.form-group input[type="submit"] {
-    width: 200px;
-    height: 50px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.form-group input[type="submit"]:hover {
-    background-color: #555;
-}
-.form-group.max-marks-checking {
-    display: flex;
-    justify-content: space-between;
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1F2223;
+        }
 
-.form-group.max-marks-checking .input-container {
-    width: calc(50% - 10px);
-}
+        .container {
+            max-width: 800px;
+            margin: 10px auto 0;
+            padding: 20px;
+            text-align: left;
+            color: #f3eeee;
+        }
 
-.form-group.max-marks-checking .input-container label {
-    display: block;
-    margin-bottom: 5px;
-}
+        .navbar {
+            background-color: #4A2C2A;
+            overflow: hidden;
+            position: relative;
+        }
 
-.form-group.max-marks-checking .input-container input[type="text"] {
-    width: 250px;
-    height: 0.75cm; /* Adjusted width for maximum marks input */
-}
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
 
+        .navbar a:hover {
+            background-color: #a1523e93;
+        }
+
+        .navbar a.icon {
+            display: none;
+        }
+        .code-snippet {
+            background-color: #333;
+            color: #1f1e1e;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+            margin-top: 30px;
+            overflow-x: auto;
+        }
+
+        .code-snippet pre {
+            margin: 0;
+        }
+        @media screen and (max-width: 600px) {
+            .navbar a:not(:first-child) {
+                display: none;
+            }
+
+            .navbar a.icon {
+                display: block;
+                float: left;
+                color: #fff;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .navbar.responsive {
+                position: relative;
+            }
+
+            .navbar.responsive a.icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .navbar.responsive a {
+                display: block;
+                float: none;
+                text-align: left;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #f3eeee;
+        }
+
+        h2,
+        h3 {
+            color: #f3eeee;
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: justify;
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+
+        ul,
+        ol {
+            margin: 20px 0;
+            padding-left: 40px;
+        }
+
+        pre {
+            background-color: #333;
+            color: #f3eeee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .formula {
+            background-color: #333;
+            color: #f3eeee;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        .code-snippet-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .terminal {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow-x: auto;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #777;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .code {
+            color: #79f279;
+            font-family: monospace;
+            line-height: 1.5;
+        }
+
+        .keyword {
+            color: #e6db74;
+        }
+
+        .string {
+            color: #a6e22e;
+        }
+
+        .constant {
+            color: #4794c0;
+        }
+
+        .terminal {
+            text-align: left;
+        }
+
+        .variable {
+            color: white;
+        }
+
+        .number {
+            color: #05ffc1;
+        }
+
+        @media screen and (max-width: 600px) {
+            .terminal {
+                width: 100%;
+                padding: 10px;
+            }
+        }
+        .svariable{
+          padding-left: 1cm;
+          color: white;
+        }
+        .comment{
+          color: #6e7574;
+        }
+        
     </style>
 </head>
 
 <body>
-  <div class="navbar" id="myNavbar">
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-    <a href="/">Home</a>
-    <a href="/about">About Us</a>
-    <a href="/help">Help</a>
-    <a href="/contact">Contact Us</a>
-    <a href="/training">Training Your Model</a>
-  </div>
-    <h1>This is help page...not ready yet</h1>
+    <div class="navbar" id="myNavbar">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        <a href="/">Home</a>
+        <a href="/about">About Us</a>
+        <a href="/help">Help</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/training">Training Your Model</a>
+    </div>
+    <div class="container">
+        <h1>Marking Formula</h1>
+ 
+        <p>Welcome to the help section of the Smart Answer Evaluator. Here, we explain how our platform calculates the marks for student answers based on the defined ranges and thresholds.</p>
+
+        
+        <p>The Smart Answer Evaluator uses a sophisticated marking algorithm to ensure fair and accurate grading. The algorithm works as follows:</p>
+
+        <h3>1. Define Ranges</h3>
+        <p>We start by defining the ranges for correct, partial, and incorrect answers based on the maximum marks:</p>
+        <ul>
+            <li><strong>Correct:</strong> 50% to 100% of maximum marks</li>
+            <li><strong>Partial:</strong> 40% to 60% of maximum marks</li>
+            <li><strong>Incorrect:</strong> 0% to 40% of maximum marks</li>
+        </ul>
+
+        <h3>2. Threshold Probabilities</h3>
+        <p>We set threshold probabilities for soft and hard checking:</p>
+        <ul>
+            <li><strong>Soft Checking:</strong></li>
+            <ul>
+                <li>Correct: 0.9</li>
+                <li>Partial: 0.6</li>
+                <li>Incorrect: 0.75</li>
+            </ul>
+            <li><strong>Hard Checking:</strong></li>
+            <ul>
+                <li>Correct: 0.95</li>
+                <li>Partial: 0.65</li>
+                <li>Incorrect: 0.7</li>
+            </ul>
+        </ul>
+
+        <h3>3. Calculate Marks</h3>
+        <p>The marks are calculated based on the predicted class's probability and its threshold:</p>
+        <ol>
+            <li>If the predicted class's probability is equal to or above the threshold, the maximum marks for that class's range are awarded.</li>
+            <li>If the predicted class does not meet the threshold, marks are reduced based on the distance from the threshold:</li>
+            <ul>
+                <li><strong>Difference:</strong> Calculate the difference between the threshold and the predicted probability.</li>
+                <li><strong>Distance:</strong> Divide the difference by a reduction step to determine the distance.</li>
+                <li><strong>Reduction Factor:</strong> Calculate the reduction factor as 10% of the maximum marks.</li>
+                <li><strong>Total Reduction:</strong> Multiply the distance by the reduction factor to get the total reduction.</li>
+                <li><strong>Marks:</strong> Subtract the total reduction from the lower limit of the range to get the final marks.</li>
+            </ul>
+        </ol>
+        <p>For example, if the predicted partial probability is below the partial threshold in soft checking:</p>
+        <div class="code-snippet-container">
+          <div class="terminal">
+              <div class="dots">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+              </div>
+              <div class="code">
+                  <span class="variable">difference</span> = <span class="constant">PARTIAL_THRESHOLD_SOFT</span> - p_partial <br>
+                  <span class="variable">distance </span> = <span class="keyword"> round</span>(difference / <span class="constant"> REDUCTION_STEP </span>) <br>
+                  <span class="variable">reduction_factor</span> = max_marks * <span class="number">0.1</span> <br>
+                
+                  <span class="variable">total_reduction</span> = distance * reduction_factor <br>                 
+                  <span class="variable">marks </span> = <span class="keyword">custom_round</span>(partial_range_min - total_reduction) <br>
+              </div>
+          </div>
+      </div>
+        <p>This ensures a fair and balanced approach to grading, accounting for varying degrees of answer accuracy.</p>
+        <p>Below is the formula that is used to calculate the marks :</p>
+        <h3>Marking Formula:</h3>
+        <div class="code-snippet-container">
+          <div class="terminal">
+              <div class="dots">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+              </div>
+              <div class="code">
+                <br>
+                 <span class="keyword">if </span>(predicted_class_probability <span class="keyword">>=</span>threshold) : <br>
+                 <span class="svariable">marks </span> = maximum_marks_for_predicted_class_range <br>
+                <span class="keyword">else :</span> <br>
+                 <span class="svariable"> difference</span>= threshold <span class="keyword">-</span> predicted_class_probability <br>
+                  <span class="svariable">distance</span> = <span class="keyword">round </span>(difference <span class="keyword">/</span> reduction_step) <br>
+                  <span class="svariable">reduction_factor</span> = maximum_marks <span class="keyword">*</span> <span class="number">0.1</span> <span class="comment"># 10% reduction</span> <br>
+                  <span class="svariable"> total_reduction</span> = distance <span class="keyword">*</span> reduction_factor <br>
+                 <span class="svariable"> marks </span> = <span class="keyword">custom_round</span>(lower_limit_of_predicted_class_range <span class="keyword">-</span> total_reduction) <br>
+                
+
+              </div>
+          </div>
+      </div>
+        <h2>Need More Help?</h2>
+        <p>If you have any questions or need further assistance, please contact us via the Contact Us page.</p>
+    </div>
     <script>
-      function myFunction() {
-        var x = document.getElementById("myNavbar");
-        if (x.className === "navbar") {
-          x.className += " responsive";
-        } else {
-          x.className = "navbar";
+        function myFunction() {
+            var x = document.getElementById("myNavbar");
+            if (x.className === "navbar") {
+                x.className += " responsive";
+            } else {
+                x.className = "navbar";
+            }
         }
-      }
     </script>
 </body>
 
 </html>
+
+ 

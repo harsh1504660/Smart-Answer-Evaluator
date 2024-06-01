@@ -19,55 +19,55 @@
             color: #333;
         }
         .navbar {
-      background-color: #4A2C2A;
-      overflow: hidden;
-      position: relative;
-    }
-    .navbar a {
-      float: left;
-      display: block;
-      color: #fff;
-      text-align: center;
-      padding: 14px 20px;
-      text-decoration: none;
-    }
-    .navbar a:hover {
-      background-color: #a1523e93;
-    }
-    .navbar a.icon {
-      display: none;
-    }
-    @media screen and (max-width: 600px) {
-      .navbar a:not(:first-child) {
-        display: none;
-      }
-      .navbar a.icon {
-        display: block;
-        float: left; /* Align icon to the left */
-        color: #fff;
-      }
-    }
-    @media screen and (max-width: 600px) {
-      .navbar.responsive {
-        position: relative;
-      }
-      .navbar.responsive a.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-      .navbar.responsive a {
-        display: block;
-        float: none;
-        text-align: left;
-      }
-    }
+            background-color: #4A2C2A;
+            overflow: hidden;
+            position: relative;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background-color: #a1523e93;
+        }
+        .navbar a.icon {
+            display: none;
+        }
+        @media screen and (max-width: 600px) {
+            .navbar a:not(:first-child) {
+                display: none;
+            }
+            .navbar a.icon {
+                display: block;
+                float: left; /* Align icon to the left */
+                color: #fff;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            .navbar.responsive {
+                position: relative;
+            }
+            .navbar.responsive a.icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            .navbar.responsive a {
+                display: block;
+                float: none;
+                text-align: left;
+            }
+        }
         .form-container {
-            background-color: #fff;
+            background-color: #a59f9f18;
             padding: 20px;
             margin-top: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
         .form-group {
             margin-bottom: 20px;
@@ -81,23 +81,37 @@
         .form-group select {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc;
+            padding-left: 0cm;
+            border: 1px solid #474242;
             border-radius: 5px;
             outline: none;
             resize: none;
         }
+        .form-group textarea {
+            background-color: rgba(0, 0, 0, 0.514);
+            color: white;
+            border-color: rgb(58, 54, 54);
+        }
+        .form-group input {
+            background-color: rgba(0, 0, 0, 0.514);
+            color: white;
+            border-color: rgb(58, 54, 54);
+        }
         .form-group select {
+            background-color: rgba(0, 0, 0, 0.514);
+            color: white;
+            border-color: rgb(58, 54, 54);
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg fill="%23fff" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>');
             background-repeat: no-repeat;
             background-position: right 10px top 50%;
         }
         .form-group input[type="submit"] {
             width: 200px;
             height: 50px;
-            background-color: #333;
+            background-color: rgba(0, 0, 0, 0.514);
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -111,26 +125,30 @@
             display: flex;
             justify-content: space-between;
         }
-
         .form-group.max-marks-checking .input-container {
-            width: calc(50% - 50px);
+            width: calc(55% - 55px);
         }
-
         .form-group.max-marks-checking .input-container label {
             display: block;
             margin-bottom: 5px;
         }
+        h1 {
+            color: #f3eeee;
+        }
+        label {
+            color: #f3eeee;
+        }
     </style>
 </head>
 <body>
-  <div class="navbar" id="myNavbar">
-    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-    <a href="/">Home</a>
-    <a href="/about">About Us</a>
-    <a href="/help">Help</a>
-    <a href="/contact">Contact Us</a>
-    <a href="/training">Training Your Model</a>
-  </div>
+    <div class="navbar" id="myNavbar">
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        <a href="/">Home</a>
+        <a href="/about">About Us</a>
+        <a href="/help">Help</a>
+        <a href="/contact">Contact Us</a>
+        <a href="/training">Training Your Model</a>
+    </div>
     <div class="container">
         <h1>Evaluate Answers</h1>
         <div class="form-container">
@@ -163,14 +181,14 @@
         </div>
     </div>
     <script>
-      function myFunction() {
-        var x = document.getElementById("myNavbar");
-        if (x.className === "navbar") {
-          x.className += " responsive";
-        } else {
-          x.className = "navbar";
+        function myFunction() {
+            var x = document.getElementById("myNavbar");
+            if (x.className === "navbar") {
+                x.className += " responsive";
+            } else {
+                x.className = "navbar";
+            }
         }
-      }
     </script>
 </body>
 </html>

@@ -5,135 +5,191 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Answer Evaluator - Evaluate Answers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/styles/default.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.2.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #1F2223;
-}
-.container {
-    max-width: 800px;
-    margin: 10px auto 0;
-    padding: 20px;
-    text-align: center;
-    color: #333;
-}
-.navbar {
-    background-color: #4A2C2A; /* Dark Gray */
-    overflow: hidden;
-    position: relative;
-    }
-    .navbar a {
-      float: left;
-      display: block;
-      color: #fff;
-      text-align: center;
-      padding: 14px 20px;
-      text-decoration: none;
-    }
-    .navbar a:hover {
-      background-color: #a1523e93;
-    }
-    .navbar a.icon {
-      display: none;
-    }
-    @media screen and (max-width: 600px) {
-      .navbar a:not(:first-child) {
-        display: none;
-      }
-      .navbar a.icon {
-        display: block;
-        float: left; /* Align icon to the left */
-        color: #fff;
-      }
-    }
-    @media screen and (max-width: 600px) {
-      .navbar.responsive {
-        position: relative;
-      }
-      .navbar.responsive a.icon {
-        position: absolute;
-        right: 0;
-        top: 0;
-      }
-      .navbar.responsive a {
-        display: block;
-        float: none;
-        text-align: left;
-      }
-    }
-.form-container {
-    background-color: #fff;
-    padding: 20px;
-    margin-top: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.form-group {
-    margin-bottom: 20px;
-}
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-.form-group select {
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    resize: none;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-}
-.form-group input[type="submit"] {
-    width: 200px;
-    height: 50px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-.form-group input[type="submit"]:hover {
-    background-color: #555;
-}
-.form-group.max-marks-checking {
-    display: flex;
-    justify-content: space-between;
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1F2223;
+            color: #fff;
+        }
 
-.form-group.max-marks-checking .input-container {
-    width: calc(50% - 10px);
-}
-
-.form-group.max-marks-checking .input-container label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group.max-marks-checking .input-container input[type="text"] {
-    width: 250px;
-    height: 0.75cm; /* Adjusted width for maximum marks input */
-}
-h1 {
+        .container {
+            max-width: 800px;
+            margin: 10px auto 0;
+            padding: 20px;
             text-align: center;
+        }
+
+        .navbar {
+            background-color: #4A2C2A; /* Dark Gray */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #fff;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #a1523e93;
+        }
+
+        .navbar a.icon {
+            display: none;
+        }
+
+        @media screen and (max-width: 600px) {
+            .navbar a:not(:first-child) {
+                display: none;
+            }
+
+            .navbar a.icon {
+                display: block;
+                float: left;
+                /* Align icon to the left */
+                color: #fff;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .navbar.responsive {
+                position: relative;
+            }
+
+            .navbar.responsive a.icon {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+
+            .navbar.responsive a {
+                display: block;
+                float: none;
+                text-align: left;
+            }
+        }
+
+        .code-snippet {
+            background-color: #333;
+            color: #111010;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
             margin-top: 30px;
-            color: #f3eeee;
+            overflow-x: auto;
+        }
+
+        .code-snippet pre {
+            margin: 0;
+            color: white;
         }
 
         p {
             text-align: justify;
             margin-top: 20px;
             line-height: 1.6;
+            color: #f3eeee;
         }
 
+        h2 {
+            text-align: left;
+            margin-top: 30px;
+            color: #f3eeee;
+        }
+
+        .dark-mode .code-snippet {
+            background-color: #000;
+            color: #ABB2BF;
+        }
+
+        .dark-mode .code-snippet pre {
+            color: #ABB2BF;
+        }
+
+        .wc {
+            color: rgb(184, 189, 178);
+            background-color: #1d1d20de;
+        }
+
+        .code-snippet-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .terminal {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 8px;
+            width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow-x: auto;
+        }
+
+        .dots {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #777;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .code {
+            color: #79f279;
+            font-family: monospace;
+            line-height: 1.5;
+        }
+
+        .keyword {
+            color: #e6db74;
+        }
+
+        .string {
+            color: #a6e22e;
+        }
+
+        .comment {
+            color: #6a9955;
+        }
+
+        .terminal {
+            text-align: left;
+        }
+
+        .variable {
+            color: white;
+        }
+
+        .number {
+            color: #59cf22;
+        }
+
+        @media screen and (max-width: 600px) {
+            .terminal {
+                width: 100%;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -145,21 +201,82 @@ h1 {
         <a href="/help">Help</a>
         <a href="/contact">Contact Us</a>
         <a href="/training">Training Your Model</a>
-      </div>
-      <div class="container">
-    <h1>This is train page....Not ready yet</h1>
-    <p>demo hello</p>
-</div>
+    </div>
+    <div class="container">
+        <h1>Accessing the Model</h1>
+        <p>Users can access this model either using our API or directly through Hugging Face. This is a guide to accessing our Smart Answer Evaluator model.</p>
+        <h2>1. Our API</h2>
+        <p>The API for this model is live at <a href="https://smart-answer-evaluator-api.onrender.com">https://smart-answer-evaluator-api.onrender.com</a>. You can simply access this API. By default, our standard model, "sae_quantized_8000," is available through the API. To access another model, you can download it from Hugging Face.</p>
+        <!-- Code Snippet 1 -->
+        <div class="code-snippet-container">
+            <div class="terminal">
+                <div class="dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="code">
+                    <span class="keyword">import</span> requests<br>
+                    <br>
+                    <span class="variable">url</span> = <span class="string">'https://smart-answer-evaluator-api.onrender.com'</span><br>
+                    <span class="variable">payload</span> = {<span class="string">'ideal'</span>: <span class="string">'Demo Ideal Answer'</span>, <span class="string">'student'</span>: <span class="string">'Demo Student Answer'</span>}<br>
+                    <span class="variable">headers</span> = {<span class="string">'Content-Type'</span>: <span class="string">'application/json'</span>}<br>
+                    <br>
+                    <span class="variable">response</span> = <span class="variable">requests</span>.post(url, json=payload, headers=headers)<br>
+                    <span class="variable">data</span> = <span class="variable">response</span>.json()<br>
+                    print(data)<br>
+                    print(<span class="string">"Partial Correct Probability : "</span>, data[<span class="string">'proba'</span>][<span class="number">0</span>])<br>
+                    print(<span class="string">"Incorrect Probability : "</span>, data[<span class="string">'proba'</span>][<span class="number">1</span>])<br>
+                    print(<span class="string">"Correct Probability : "</span>, data[<span class="string">'proba'</span>][<span class="number">2</span>])<br>
+                    print(<span class="string">"Class : "</span>, data[<span class="string">'idx'</span>])
+                </div>
+            </div>
+        </div>
+        <h2>2. Accessing from Hugging Face</h2>
+        <p>You can download both of our models, 'sae_quantized_8000' and 'sae_quantized_5000,' directly from Hugging Face.</p>
+        <div class="code-snippet-container">
+            <div class="terminal">
+                <div class="dots">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="code">
+                    <span class="keyword">from</span> BertDataGenerator.data_generator <span class="keyword">import</span> BertSemanticDataGenerator <br>
+                    <span class="keyword">from</span> huggingface_hub <span class="keyword">import</span> hf_hub_download<br>
+                    <span class="keyword">import </span> onnxruntime <br>
+                    <span class="keyword">import</span> numpy <span class="keyword">as</span> np <br>
+                    <br>
+                    <span class="variable">model_name</span> = <span class="string">'harshai1504/sae'</span><br>
+                    <span class="variable">model_8000</span> = <span class="variable">hf_hub_download</span>(repo_id=model_name, filename="sae_quantized_8000.onnx") <br>
+                    <span class="variable">model_5000</span> = <span class="variable">hf_hub_download</span>(repo_id=model_name, filename="sae_quantized_5000.onnx") <br>
+                    <span class="variable">session</span> = <span class="variable">onnxruntime</span>.InferenceSession(model) <br>
+                    <br>
+                    <span class="variable">answer_pair</span> = <span class="variable">np</span>([[<span class="string">"ideal string"</span>, <span class="string">"student string"</span>]]) <br>
+                    <span class="variable">query_generator</span> = <span class="'variable">BertSemanticDataGenerator</span>(answer_pair, <span class="keyword">labels</span> = None, <span class="keyword">batch_size</span> = 1, <span class="keyword">shuffle</span> = False, <span class="keyword">include_targets</span> = False,) <br>
+                    <span class="variable">query_data</span> = <span class="variable">query_generator</span>[<span class="number">0</span>] <br>
+                    <br>
+                    <span class="variable">output</span> = <span class="variable">session</span>.run(None, { <span class="string">'input_ids'</span>: query_data[<span class="number">0</span>], <span class="string">'attention_masks'</span>: query_data[<span class="number">1</span>], <span class="string">'token_type_ids'</span>: query_data[<span class="number">2</span>]}) <br>
+                    <br>
+                    print(output)<br>
+                    print(<span class="string">"Partial Correct Probability : "</span>, output[0][0][0])<br>
+                    print(<span class="string">"Incorrect Probability : "</span>, output[0][0][1])<br>
+                    print(<span class="string">"Correct Probability : "</span>, output[0][0][2])
+                </div>
+            </div>
+        </div>
+        <p>"'sae_quantized_8000' is slightly less accurate than 'sae_quantized_5000,' but it is more versatile as it was trained on more data. We suggest using the 8000 model first, and if the results are not satisfactory, you can always switch to the 5000 model."</p>
+    </div>
     <script>
         function myFunction() {
-          var x = document.getElementById("myNavbar");
-          if (x.className === "navbar") {
-            x.className += " responsive";
-          } else {
-            x.className = "navbar";
-          }
+            var x = document.getElementById("myNavbar");
+            if (x.className === "navbar") {
+                x.className += " responsive";
+            } else {
+                x.className = "navbar";
+            }
         }
-      </script>
+    </script>
 </body>
 
 </html>
