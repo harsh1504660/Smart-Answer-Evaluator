@@ -12,11 +12,11 @@ class PredictRequest(BaseModel):
     student: str
 
 @app.get('/')
-def hello():
-    print('hello world')
-    return {"hello": "world"}
+def welcome():
+    print('Someone is knocking!!!')
+    return {"Welcome To": "Smart Answer Evaluator"}
 
-@app.post('/pred')
+@app.post('/')
 def predict(request: PredictRequest):
     try:
         print(request.ideal)
