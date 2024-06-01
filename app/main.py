@@ -31,8 +31,6 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 if os.path.exists(UPLOAD_FOLDER):
     delete_all_elements(UPLOAD_FOLDER)
-else:
-    os.makedirs(UPLOAD_FOLDER)
 
 def allowed_file(filename):
     return '.' in filename and \
