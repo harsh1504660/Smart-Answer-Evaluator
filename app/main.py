@@ -71,59 +71,70 @@ def evaluate_answers_manual():
 
 ### SHIFT THEM INTO EVALUATION.PY
 def evaluate_answer_image():
-    if os.path.exists(UPLOAD_FOLDER):
-        shutil.rmtree(UPLOAD_FOLDER)
-    os.makedirs(UPLOAD_FOLDER)
+    # Temporary folder to store uploaded files
+    temp_folder = 'temp_uploads'
+    os.makedirs(temp_folder, exist_ok=True)  # Create temp folder if not exists
+    
     # Check if the post request has the file part
     if 'ideal-answer-input' not in request.files or 'student-answer-input' not in request.files:
         flash('No file part')
-        return render_template("error.html",redirect_url='img') 
+        return render_template("error.html", redirect_url='img') 
 
     ideal_answer_file = request.files['ideal-answer-input']
     student_answer_file = request.files['student-answer-input']
     max_marks = request.form['max-marks']
     checking_type = request.form['checking-type']
 
-
     if not max_marks.strip():
         flash('Please enter maximum marks')
-        return render_template("error.html",redirect_url='img') 
+        return render_template("error.html", redirect_url='img') 
+    
     if ideal_answer_file.filename == '' or student_answer_file.filename == '':
         flash('No selected file')
-        return render_template("error.html",redirect_url='img')
+        return render_template("error.html", redirect_url='img')
 
-    if ideal_answer_file and allowed_file(ideal_answer_file.filename) and student_answer_file and allowed_file(student_answer_file.filename):
+    # Save uploaded files to temp folder
+    ideal_answer_filename = secure_filename(ideal_answer_file.filename)
+    student_answer_filename = secure_filename(student_answer_file.filename)
+    
+    ideal_answer_path = os.path.join(temp_folder, 'ideal_' + ideal_answer_filename)
+    student_answer_path = os.path.join(temp_folder, 'student_' + student_answer_filename)
+    
+    ideal_answer_file.save(ideal_answer_path)
+    student_answer_file.save(student_answer_path)
 
-        ideal_answer_filename = secure_filename(ideal_answer_file.filename)
-        student_answer_filename = secure_filename(student_answer_file.filename)
+    try:
+        # Perform OCR on the uploaded images
+        ideal_text = ocr(ideal_answer_path)
+        student_text = ocr(student_answer_path)
+
+        # Process the extracted text (e.g., preprocess, convert to required format)
+        ideal_processed = prep(ideal_text)
+        student_processed = prep(student_text)
+
+        # Perform evaluation based on processed text
+        query = dataloader(ideal_processed, student_processed)
+        proba, idx = prediction(query)
         
-        ideal_answer_path = os.path.join(app.config['UPLOAD_FOLDER'], 'ideal'+ideal_answer_filename)
-        student_answer_path = os.path.join(app.config['UPLOAD_FOLDER'], 'student'+student_answer_filename)
-        
-        ideal_answer_file.save(ideal_answer_path)
-        student_answer_file.save(student_answer_path)
-
-        ideal = ocr(ideal_answer_path)
-        student = ocr(student_answer_path)
-
-        ideal = prep(ideal)
-        student = prep(ideal)
-
-        query = dataloader(ideal,student)
-        print(ideal)
-        print(student)
-        proba , idx = prediction(query)
         p_correct = proba[0][0][2]
         p_incorrect = proba[0][0][1]
         p_partial = proba[0][0][0]
-        marks = evaluation(checking_type=checking_type,max_marks=max_marks,p_correct=p_correct,
-            p_incorrect =  p_incorrect,p_partial =  p_partial,idx = idx)
         
-        return render_template('result.html',marks=marks)
+        marks = evaluation(checking_type=checking_type, max_marks=max_marks,
+                           p_correct=p_correct, p_incorrect=p_incorrect,
+                           p_partial=p_partial, idx=idx)
+        
+        return render_template('result.html', marks=marks)
     
-    else :
-        return render_template('error.html',redirect_url='img')
-
+    except Exception as e:
+        # Handle any exceptions that may occur during OCR or evaluation
+        print("Error:", e)
+        flash('Error processing files')
+        return render_template("error.html", redirect_url='img')
+    
+    finally:
+        # Delete temporarily stored files after processing
+        shutil.rmtree(temp_folder)
 @app.route('/result/', methods=['POST'])
 def result():
     img = request.form.get('image')
