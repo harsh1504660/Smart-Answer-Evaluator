@@ -8,16 +8,7 @@ import hashlib
 import shutil
 from app.evaluation import evaluation
 
-def delete_all_elements(folder_path):
-    for item in os.listdir(folder_path):
-        item_path = os.path.join(folder_path, item)
-        try:
-            if os.path.isfile(item_path) or os.path.islink(item_path):
-                os.remove(item_path)
-            elif os.path.isdir(item_path):
-                shutil.rmtree(item_path)
-        except Exception as e:
-            print(f'Failed to delete {item_path}. Reason: {e}')
+
 def generate_secret_key():
     random_bytes = os.urandom(16)
     return hashlib.sha256(random_bytes).hexdigest()
@@ -30,7 +21,7 @@ app.secret_key = secret_key
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-os.makedirs(UPLOAD_FOLDER)
+
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -80,6 +71,7 @@ def evaluate_answers_manual():
 
 ### SHIFT THEM INTO EVALUATION.PY
 def evaluate_answer_image():
+    os.makedirs(UPLOAD_FOLDER)
     # Check if the post request has the file part
     if 'ideal-answer-input' not in request.files or 'student-answer-input' not in request.files:
         flash('No file part')
@@ -124,6 +116,7 @@ def evaluate_answer_image():
         p_partial = proba[0][0][0]
         marks = evaluation(checking_type=checking_type,max_marks=max_marks,p_correct=p_correct,
             p_incorrect =  p_incorrect,p_partial =  p_partial,idx = idx)
+        shutil.rmtree(UPLOAD_FOLDER)
         return render_template('result.html',marks=marks)
     
     else :
