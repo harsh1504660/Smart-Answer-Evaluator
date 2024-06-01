@@ -5,9 +5,19 @@ from werkzeug.utils import secure_filename
 import os 
 from app.ocr import ocr
 import hashlib
+import shutil
 from app.evaluation import evaluation
 
-
+def delete_all_elements(folder_path):
+    for item in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, item)
+        try:
+            if os.path.isfile(item_path) or os.path.islink(item_path):
+                os.remove(item_path)
+            elif os.path.isdir(item_path):
+                shutil.rmtree(item_path)
+        except Exception as e:
+            print(f'Failed to delete {item_path}. Reason: {e}')
 def generate_secret_key():
     random_bytes = os.urandom(16)
     return hashlib.sha256(random_bytes).hexdigest()
@@ -18,7 +28,11 @@ UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png'}
 app.secret_key = secret_key
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-os.makedirs(UPLOAD_FOLDER)
+
+if os.path.exists(UPLOAD_FOLDER):
+    delete_all_elements(UPLOAD_FOLDER)
+else:
+    os.makedirs(UPLOAD_FOLDER)
 
 def allowed_file(filename):
     return '.' in filename and \

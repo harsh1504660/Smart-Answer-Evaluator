@@ -10,7 +10,7 @@ def prediction(query):
     print('no nltk')
     api_key = os.getenv('hf_key')
     model_name='harshai1504/sae'
-    model = hf_hub_download(repo_id=model_name, filename="model_quantized_8000.onnx", use_auth_token=api_key)
+    model = hf_hub_download(repo_id=model_name, filename="sae_quantized_8000.onnx", use_auth_token=api_key)
     print("model is loaded")
     session = onnxruntime.InferenceSession(model)
     print("model is loaded")
@@ -31,4 +31,3 @@ def prediction(query):
     print(idx)
     return output, idx
    # return proba ,idx
-
