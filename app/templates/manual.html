@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             padding: 0;
             background-color: #1F2223;
         }
+
         .container {
             max-width: 800px;
             margin: 10px auto 0;
@@ -18,11 +20,13 @@
             text-align: center;
             color: #333;
         }
+
         .navbar {
             background-color: #4A2C2A;
             overflow: hidden;
             position: relative;
         }
+
         .navbar a {
             float: left;
             display: block;
@@ -31,37 +35,46 @@
             padding: 14px 20px;
             text-decoration: none;
         }
+
         .navbar a:hover {
             background-color: #a1523e93;
         }
+
         .navbar a.icon {
             display: none;
         }
+
         @media screen and (max-width: 600px) {
             .navbar a:not(:first-child) {
                 display: none;
             }
+
             .navbar a.icon {
                 display: block;
-                float: left; /* Align icon to the left */
+                float: left;
+                /* Align icon to the left */
                 color: #fff;
             }
         }
+
         @media screen and (max-width: 600px) {
             .navbar.responsive {
                 position: relative;
             }
+
             .navbar.responsive a.icon {
                 position: absolute;
                 right: 0;
                 top: 0;
             }
+
             .navbar.responsive a {
                 display: block;
                 float: none;
                 text-align: left;
             }
         }
+
         .form-container {
             background-color: #a59f9f18;
             padding: 20px;
@@ -69,13 +82,16 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .form-group label {
             display: block;
             margin-bottom: 5px;
         }
+
         .form-group textarea,
         .form-group input[type="text"],
         .form-group select {
@@ -87,16 +103,19 @@
             outline: none;
             resize: none;
         }
+
         .form-group textarea {
             background-color: rgba(0, 0, 0, 0.514);
             color: white;
             border-color: rgb(58, 54, 54);
         }
+
         .form-group input {
             background-color: rgba(0, 0, 0, 0.514);
             color: white;
             border-color: rgb(58, 54, 54);
         }
+
         .form-group select {
             background-color: rgba(0, 0, 0, 0.514);
             color: white;
@@ -108,6 +127,7 @@
             background-repeat: no-repeat;
             background-position: right 10px top 50%;
         }
+
         .form-group input[type="submit"] {
             width: 200px;
             height: 50px;
@@ -118,28 +138,35 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .form-group input[type="submit"]:hover {
             background-color: #555;
         }
+
         .form-group.max-marks-checking {
             display: flex;
             justify-content: space-between;
         }
+
         .form-group.max-marks-checking .input-container {
             width: calc(55% - 55px);
         }
+
         .form-group.max-marks-checking .input-container label {
             display: block;
             margin-bottom: 5px;
         }
+
         h1 {
             color: #f3eeee;
         }
+
         label {
             color: #f3eeee;
         }
     </style>
 </head>
+
 <body>
     <div class="navbar" id="myNavbar">
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
@@ -147,7 +174,7 @@
         <a href="/about">About Us</a>
         <a href="/help">Help</a>
         <a href="/contact">Contact Us</a>
-        <a href="/training">Training Your Model</a>
+        <a href="/training">Model Access</a>
     </div>
     <div class="container">
         <h1>Evaluate Answers</h1>
@@ -191,5 +218,5 @@
         }
     </script>
 </body>
-</html>
 
+</html>
