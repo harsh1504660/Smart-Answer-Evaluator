@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Smart Answer Evaluator</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #1F2223; /* Dark blue background */
-  }
-  .container {
-    max-width: 800px;
-    margin: 100px auto 0;
-    padding: 20px;
-    text-align: center;
-    color: #fff; /* White text */
-  }
-  .navbar {
-    background-color: #4A2C2A; /* Dark Gray */
-    overflow: hidden;
-    position: relative;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Answer Evaluator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1F2223;
+      /* Dark blue background */
     }
+
+    .container {
+      max-width: 800px;
+      margin: 100px auto 0;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+      /* White text */
+    }
+
+    .navbar {
+      background-color: #4A2C2A;
+      /* Dark Gray */
+      overflow: hidden;
+      position: relative;
+    }
+
     .navbar a {
       float: left;
       display: block;
@@ -31,31 +38,39 @@
       padding: 14px 20px;
       text-decoration: none;
     }
+
     .navbar a:hover {
       background-color: #a1523e93;
     }
+
     .navbar a.icon {
       display: none;
     }
+
     @media screen and (max-width: 600px) {
       .navbar a:not(:first-child) {
         display: none;
       }
+
       .navbar a.icon {
         display: block;
-        float: left; /* Align icon to the left */
+        float: left;
+        /* Align icon to the left */
         color: #fff;
       }
     }
+
     @media screen and (max-width: 600px) {
       .navbar.responsive {
         position: relative;
       }
+
       .navbar.responsive a.icon {
         position: absolute;
         right: 0;
         top: 0;
       }
+
       .navbar.responsive a {
         display: block;
         float: none;
@@ -63,11 +78,10 @@
       }
     }
 
-  /* Typing animation */
-
-
-</style>
+    /* Typing animation */
+  </style>
 </head>
+
 <body>
   <div class="navbar" id="myNavbar">
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
@@ -75,20 +89,21 @@
     <a href="/about">About Us</a>
     <a href="/help">Help</a>
     <a href="/contact">Contact Us</a>
-    <a href="/training">Training Your Model</a>
+    <a href="/training">Model Access</a>
   </div>
-<div class="container">
-  <h1 class="typing-animation">Evaluated Marks : {{marks}} </h1>
-</div>
-<script>
-  function myFunction() {
-    var x = document.getElementById("myNavbar");
-    if (x.className === "navbar") {
-      x.className += " responsive";
-    } else {
-      x.className = "navbar";
+  <div class="container">
+    <h1 class="typing-animation">Evaluated Marks : {{marks}} </h1>
+  </div>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myNavbar");
+      if (x.className === "navbar") {
+        x.className += " responsive";
+      } else {
+        x.className = "navbar";
+      }
     }
-  }
-</script>
+  </script>
 </body>
+
 </html>
