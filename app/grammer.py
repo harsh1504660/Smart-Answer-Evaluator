@@ -21,7 +21,7 @@ def correct_grammar(sentence):
         print("fetching the results")
         text = response.choices[0].message['content']
         text = text.replace('*'," ")
-        print(text)
+        return text
         print('\n')
     except Exception as e:
         print(e)
