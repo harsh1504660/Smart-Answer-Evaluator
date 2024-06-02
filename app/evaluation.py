@@ -62,7 +62,7 @@ def calculate_marks_soft(max_marks , p_correct,p_incorrect,p_partial,idx,correct
             return marks
 
         else :
-            if p_partial >=0.10:
+            if p_partial >=0.05:
                 partial_contrib = p_partial*max_marks*0.05
             diffrence = CORRECT_THRESHOLD_SOFT - p_correct
             distance = round(diffrence / REDUCTION_STEP)
@@ -81,11 +81,8 @@ def calculate_marks_soft(max_marks , p_correct,p_incorrect,p_partial,idx,correct
             marks = incorrect_r[0]
             return marks
         else :
-            if p_partial >= 0.10:
-                print("in the new section")
-                partial_contrib = p_partial*max_marks*0.05
-                print(max_marks)
-                print(partial_contrib)
+            if p_partial >= 0.05:
+                partial_contrib = p_partial*max_marks*0.05*10
             diffrence =INCORRECT_THRESHOLD_SOFT - p_incorrect
             print("probab of incorrect : ", p_incorrect )
             print(diffrence)
@@ -120,30 +117,36 @@ def calculate_marks_hard(max_marks , p_correct,p_incorrect,p_partial,idx,correct
                 marks = partial_r[-1]
                 return marks
     elif idx ==2:
+        partial_contrib=0
         if p_correct >=CORRECT_THRESHOLD_HARD:    ### for maximum marsk
             marks = correct_r[0]
             return marks
         else :
+            if p_partial >= 0.10:
+                partial_contrib = p_partial*max_marks*0.05*10
             diffrence = CORRECT_THRESHOLD_HARD - p_correct
             distance = round(diffrence / REDUCTION_STEP)
             reduction_factor = max_marks*0.1          ### reduction marks
             total_reduction = distance*reduction_factor
-            marks = custom_round(correct_r[0] - total_reduction)
+            marks = custom_round(correct_r[0] - total_reduction-partial_contrib)
             if marks >= correct_r[-1]:
                 return marks
             else :
                 marks = correct_r[-1]
                 return marks
     else :
+        partial_contrib=0
         if p_incorrect >= INCORRECT_THRESHOLD_HARD:
             marks = incorrect_r[0]
             return marks
         else :
+            if p_partial >= 0.10:
+                partial_contrib = p_partial*max_marks*0.05
             diffrence =INCORRECT_THRESHOLD_HARD - p_incorrect
             distance = round(diffrence/REDUCTION_STEP)
             reduction_factor = max_marks*0.1
-            total_reductin = distance*reduction_facotr
-            marks = custom_round(incorrect_r[0] + total_reduction)
+            total_reduction = distance*reduction_factor
+            marks = custom_round(incorrect_r[0] + total_reduction+partial_contrib)
             if marks <=incorrect_r[-1]:
                 return marks
             else :
@@ -161,4 +164,4 @@ def evaluation(checking_type,max_marks , p_correct,p_incorrect,p_partial,idx):
     else:
         marks = calculate_marks_hard(max_marks , p_correct,p_incorrect,p_partial,idx,correct_r, partial_r, incorrect_r)
         return marks 
-print(evaluation('hard',15,0.4,0.3,0.5,0))
+#print(evaluation('soft',10,0.3,0.6,0.1,1))
