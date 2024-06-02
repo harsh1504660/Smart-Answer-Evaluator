@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +13,14 @@
       background-color: #1F2223;
       color: #333;
     }
+
     .container {
       max-width: 800px;
       margin: 50px auto;
       padding: 20px;
       text-align: center;
     }
+
     .button-container {
       display: flex;
       justify-content: center;
@@ -25,6 +28,7 @@
       flex-wrap: wrap;
       margin-top: 30px;
     }
+
     .button {
       display: inline-block;
       width: 200px;
@@ -41,14 +45,17 @@
       transition: background-color 0.3s;
       margin: 10px 0;
     }
+
     .button:hover {
       background-color: #a1523e93;
     }
+
     .navbar {
       background-color: #4A2C2A;
       overflow: hidden;
       position: relative;
     }
+
     .navbar a {
       float: left;
       display: block;
@@ -57,37 +64,46 @@
       padding: 14px 20px;
       text-decoration: none;
     }
+
     .navbar a:hover {
       background-color: #a83737;
     }
+
     .navbar a.icon {
       display: none;
     }
+
     @media screen and (max-width: 600px) {
       .navbar a:not(:first-child) {
         display: none;
       }
+
       .navbar a.icon {
         display: block;
-        float: left; /* Align icon to the left */
+        float: left;
+        /* Align icon to the left */
         color: #fff;
       }
     }
+
     @media screen and (max-width: 600px) {
       .navbar.responsive {
         position: relative;
       }
+
       .navbar.responsive a.icon {
         position: absolute;
         right: 0;
         top: 0;
       }
+
       .navbar.responsive a {
         display: block;
         float: none;
         text-align: left;
       }
     }
+
     .typing-animation {
       overflow: hidden;
       white-space: nowrap;
@@ -95,18 +111,45 @@
       border-right: 3px solid #007bff;
       animation: typing 6s steps(30) forwards, blink 1s step-end infinite;
     }
+
     @keyframes typing {
-      0% { width: 0; }
-      5% { width: 11.5%; }
-      15% { width: 23%; }
-      25% { width: 34.5%; }
-      35% { width: 46%; }
-      50% { width: 69.5%; }
-      100% { width: 100%; }
+      0% {
+        width: 0;
+      }
+
+      5% {
+        width: 11.5%;
+      }
+
+      15% {
+        width: 23%;
+      }
+
+      25% {
+        width: 34.5%;
+      }
+
+      35% {
+        width: 46%;
+      }
+
+      50% {
+        width: 69.5%;
+      }
+
+      100% {
+        width: 100%;
+      }
     }
+
     @keyframes blink {
-      0%, 100% { border-color: transparent; }
+
+      0%,
+      100% {
+        border-color: transparent;
+      }
     }
+
     @media (max-width: 600px) {
       .container {
         margin: 20px auto;
@@ -117,17 +160,20 @@
         padding-top: 2cm;
         height: 70vh;
       }
+
       .button-container {
         display: flex;
         flex-direction: column;
         align-items: center;
       }
+
       .button {
         width: calc(100% - 40px);
         height: 80px;
         font-size: 16px;
         line-height: 80px;
       }
+
       .typing-animation {
         font-size: 18px;
         width: 100%;
@@ -135,15 +181,23 @@
         border-right: 3px solid #007bff;
       }
     }
+
     @keyframes mobileTyping {
-      0% { width: 0; }
-      100% { width: 100%; }
+      0% {
+        width: 0;
+      }
+
+      100% {
+        width: 100%;
+      }
     }
+
     h1 {
-            color: #f3eeee;
-        }
+      color: #f3eeee;
+    }
   </style>
 </head>
+
 <body>
   <div class="navbar" id="myNavbar">
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
@@ -151,7 +205,7 @@
     <a href="/about">About Us</a>
     <a href="/help">Help</a>
     <a href="/contact">Contact Us</a>
-    <a href="/training">Training Your Model</a>
+    <a href="/training">Model Access</a>
   </div>
   <div class="container">
     <h1 class="typing-animation">Welcome to Smart Answer Evaluator</h1>
@@ -172,5 +226,5 @@
     }
   </script>
 </body>
-</html>
 
+</html>
