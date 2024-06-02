@@ -1,31 +1,28 @@
-from spellchecker import SpellChecker
+import openai
+import re
+import time
+import random
+import os
+# Set your OpenAI API key
+api_key = os.getenv('gpt_key')
+openai.api_key = api_key
+std_prompt = 'correct the grammer\n'
 
 def correct_grammar(sentence):
-    spell = SpellChecker()
-    
-    # Split the sentence into words
-    words = sentence.split()
-    
-    # Find misspelled words
-    misspelled = spell.unknown(words)
-    
-    # Correct misspelled words
-    corrected_sentence = []
-    for word in words:
-        if word in misspelled:
-            # Replace misspelled word with the most likely correction
-            corrected_sentence.append(spell.correction(word))
-        else:
-            corrected_sentence.append(word)
-    
-    return ' '.join(corrected_sentence)
+    try:
+        response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=[
+        {"role": "user", "content": "{}+{}".format(std_prompt,sentence)}
+        ]
+        )
+        print("request sent")
 
-# Example sentence with grammar errors
-sentence = "As i dont knw the Doutput of the sytsem"
-
-# Correct the grammar
-corrected_sentence = correct_grammar(sentence)
-
-# Print the corrected sentence
-print("Original Sentence:", sentence)
-print("Corrected Sentence:", corrected_sentence)
+        print("fetching the results")
+        text = response.choices[0].message['content']
+        text = text.replace('*'," ")
+        return text
+        print('\n')
+    except Exception as e:
+        print(e)
+        exit()
