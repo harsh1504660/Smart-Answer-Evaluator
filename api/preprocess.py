@@ -18,7 +18,7 @@ def prep(text):
     text = text.replace('\n',' ')
     text = text.replace('/n',' ')
     processed_text = correct_grammar(text)
-    text = text.lower()
+    text = processed_text.lower()
     text = re.sub(r'[^\w\s]', '',text)
     text = remove_stopwords(text)
     # Join filtered tokens back into a string
