@@ -2,311 +2,229 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Answer Evaluator - Evaluate Answers</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #1F2223;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Answer Evaluator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #1F2223;
+      color: #333;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 10px auto 0;
-            padding: 20px;
-            text-align: center;
-            color: #333;
-        }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: center;
+    }
 
-        .navbar {
-            background-color: #4A2C2A;
-            overflow: hidden;
-            position: relative;
-        }
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
 
-        .navbar a {
-            float: left;
-            display: block;
-            color: #fff;
-            text-align: center;
-            padding: 14px 20px;
-            text-decoration: none;
-        }
+    .button {
+      display: inline-block;
+      width: 200px;
+      height: 100px;
+      background-color: #4A2C2A;
+      color: #fff;
+      text-align: center;
+      font-size: 18px;
+      line-height: 100px;
+      text-decoration: none;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin: 10px 0;
+    }
 
-        .navbar a:hover {
-            background-color: #a1523e93;
-        }
+    .button:hover {
+      background-color: #a1523e93;
+    }
 
-        .navbar a.icon {
-            display: none;
-        }
+    .navbar {
+      background-color: #4A2C2A;
+      overflow: hidden;
+      position: relative;
+    }
 
-        @media screen and (max-width: 600px) {
-            .navbar a:not(:first-child) {
-                display: none;
-            }
+    .navbar a {
+      float: left;
+      display: block;
+      color: #fff;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
 
-            .navbar a.icon {
-                display: block;
-                float: left;
-                /* Align icon to the left */
-                color: #fff;
-            }
-        }
+    .navbar a:hover {
+      background-color: #a83737;
+    }
 
-        @media screen and (max-width: 600px) {
-            .navbar.responsive {
-                position: relative;
-            }
+    .navbar a.icon {
+      display: none;
+    }
 
-            .navbar.responsive a.icon {
-                position: absolute;
-                right: 0;
-                top: 0;
-            }
+    @media screen and (max-width: 600px) {
+      .navbar a:not(:first-child) {
+        display: none;
+      }
 
-            .navbar.responsive a {
-                display: block;
-                float: none;
-                text-align: left;
-            }
+      .navbar a.icon {
+        display: block;
+        float: left;
+        /* Align icon to the left */
+        color: #fff;
+      }
+    }
 
-            .form-group.max-marks-checking .input-container {
-                width: 100%;
-            }
+    @media screen and (max-width: 600px) {
+      .navbar.responsive {
+        position: relative;
+      }
 
-            .form-group.max-marks-checking .input-container select,
-            .form-group.max-marks-checking .input-container input[type="text"] {
-                width: calc(100% - 20px);
-                /* Full width minus padding */
-            }
-        }
+      .navbar.responsive a.icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
 
-        .form-container {
-            background-color: #a59f9f18;
-            padding: 20px;
-            margin-top: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+      .navbar.responsive a {
+        display: block;
+        float: none;
+        text-align: left;
+      }
+    }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+    .typing-animation {
+      overflow: hidden;
+      white-space: nowrap;
+      margin: 0 auto;
+      border-right: 3px solid #007bff;
+      animation: typing 6s steps(30) forwards, blink 1s step-end infinite;
+    }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-        }
+    @keyframes typing {
+      0% {
+        width: 0;
+      }
 
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-            resize: none;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" viewBox="0 0 24 24" width="24" height="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 10px top 50%;
-        }
+      5% {
+        width: 11.5%;
+      }
 
-        .form-group input[type="submit"] {
-            width: 200px;
-            height: 50px;
-            background-color: rgba(0, 0, 0, 0.514);
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      15% {
+        width: 23%;
+      }
 
-        .form-group input[type="submit"]:hover {
-            background-color: #555;
-        }
+      25% {
+        width: 34.5%;
+      }
 
-        .form-group.max-marks-checking {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
+      35% {
+        width: 46%;
+      }
 
-        .form-group.max-marks-checking .input-container {
-            width: calc(48% - 10px);
-            margin-bottom: 10px;
-        }
+      50% {
+        width: 69.5%;
+      }
 
-        .form-group.max-marks-checking .input-container label {
-            display: block;
-            margin-bottom: 5px;
-        }
+      100% {
+        width: 100%;
+      }
+    }
 
-        .form-group.max-marks-checking .input-container input[type="text"],
-        .form-group.max-marks-checking .input-container select {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-            resize: none;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-        }
+    @keyframes blink {
 
-        .image-upload {
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-        }
+      0%,
+      100% {
+        border-color: transparent;
+      }
+    }
 
-        .image-upload input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px auto;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: top;
+        padding-top: 2cm;
+        height: 70vh;
+      }
 
-        .image-upload label {
-            display: block;
-            padding: 10px 20px;
-            background-color: #333;
-            color: #fff;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      .button-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        .image-upload label:hover {
-            background-color: #555;
-        }
+      .button {
+        width: calc(100% - 40px);
+        height: 80px;
+        font-size: 16px;
+        line-height: 80px;
+      }
 
-        .image-preview {
-            margin-top: 10px;
-            color: #f3eeee;
-        }
+      .typing-animation {
+        font-size: 18px;
+        width: 100%;
+        animation: mobileTyping 6s steps(100) forwards, blink 1s step-end infinite;
+        border-right: 3px solid #007bff;
+      }
+    }
 
-        .image-preview img {
-            max-width: 100%;
-            max-height: 200px;
-            margin-top: 10px;
-        }
+    @keyframes mobileTyping {
+      0% {
+        width: 0;
+      }
 
-        h1 {
-            color: #f3eeee;
-        }
+      100% {
+        width: 100%;
+      }
+    }
 
-        label {
-            color: #f3eeee;
-        }
-    </style>
+    h1 {
+      color: #f3eeee;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="navbar" id="myNavbar">
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/help">Help</a>
-        <a href="/contact">Contact Us</a>
-        <a href="/training">Model Access</a>
+  <div class="navbar" id="myNavbar">
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    <a href="/">Home</a>
+    <a href="/about">About Us</a>
+    <a href="/help">Help</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/training">Model Access</a>
+  </div>
+  <div class="container">
+    <h1 class="typing-animation">Welcome to Smart Answer Evaluator</h1>
+    <div class="button-container">
+      <a href="manual" class="button">Upload Manually</a>
+      <a href="img" class="button">Upload Image</a>
     </div>
-    <div class="container">
-        <h1>Evaluate Answers</h1>
-        <div class="form-container">
-            <form action="/result/" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="ideal-answer-input">Ideal Answer</label>
-                    <div class="image-upload">
-                        <input type="file" id="ideal-answer-input" name="ideal-answer-input" accept="image/*">
-                        <label for="ideal-answer-input">Choose Image</label>
-                    </div>
-                    <div class="image-preview">
-                        <img id="ideal-answer-preview" src="" alt="Ideal Answer Preview">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="student-answer-input">Student's Answer</label>
-                    <div class="image-upload">
-                        <input type="file" id="student-answer-input" name="student-answer-input" accept="image/*">
-                        <label for="student-answer-input">Choose Image</label>
-                    </div>
-                    <div class="image-preview">
-                        <img id="student-answer-preview" src="" alt="Student's Answer Preview">
-                    </div>
-                </div>
-                <div class="form-group max-marks-checking">
-                    <div class="input-container">
-                        <label for="max-marks">Maximum Marks</label>
-                        <input type="text" id="max-marks" name="max-marks" value="10">
-                    </div>
-                    <div class="input-container">
-                        <label for="checking-type">Checking Type</label>
-                        <select id="checking-type" name="checking-type">
-                            <option value="soft">Soft Checking</option>
-                            <option value="hard">Hard Checking</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" name="image" value="Evaluate">
-                </div>
-            </form>
-        </div>
-    </div>
+  </div>
 
-    <script>
-
-        function myFunction() {
-            var x = document.getElementById("myNavbar");
-            if (x.className === "navbar") {
-                x.className += " responsive";
-            } else {
-                x.className = "navbar";
-            }
-        }
-        const idealAnswerInput = document.getElementById('ideal-answer-input');
-        const idealAnswerPreview = document.getElementById('ideal-answer-preview');
-
-        const studentAnswerInput = document.getElementById('student-answer-input');
-        const studentAnswerPreview = document.getElementById('student-answer-preview');
-
-        idealAnswerInput.addEventListener('change', function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.addEventListener('load', function () {
-                    idealAnswerPreview.src = reader.result;
-                });
-                reader.readAsDataURL(file);
-            } else {
-                idealAnswerPreview.src = '';
-            }
-        });
-
-        studentAnswerInput.addEventListener('change', function () {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.addEventListener('load', function () {
-                    studentAnswerPreview.src = reader.result;
-                });
-                reader.readAsDataURL(file);
-            } else {
-                studentAnswerPreview.src = '';
-            }
-        });
-    </script>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("myNavbar");
+      if (x.className === "navbar") {
+        x.className += " responsive";
+      } else {
+        x.className = "navbar";
+      }
+    }
+  </script>
 </body>
 
 </html>
