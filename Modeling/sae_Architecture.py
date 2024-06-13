@@ -31,3 +31,11 @@ output = tf.keras.layers.Dense(3, activation="softmax")(dropout)
 
 # Model definition
 model = tf.keras.models.Model(inputs=[input_ids, attention_masks, token_type_ids], outputs=output)
+
+model.compile(
+    optimizer=tf.keras.optimizers.Adam(learning_rate=3e-5),
+    loss="categorical_crossentropy",
+    metrics=["accuracy"],
+)
+
+model.summary()
